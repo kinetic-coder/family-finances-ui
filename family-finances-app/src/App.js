@@ -1,5 +1,6 @@
 import './App.css';
 import Home from './Home';
+import Registration from './User/Registration';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ function App() {
         <header className="App-header">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/Register" element={<Registration />} />
           </Routes>
         </header>
       </div>
@@ -38,7 +40,7 @@ function Navbar() {
           style={styles.menu} 
         >
           <li><Link to="/">Home</Link></li>
-          {/* Add more links as needed */}
+          <li><Link to="/Register">Register</Link></li>
         </ul>
       )}
     </nav>
@@ -48,6 +50,7 @@ function Navbar() {
 const styles = {
   navbar: {
     position: 'relative',
+    backgroundColor: 'white',
   },
   burgerIcon: {
     fontSize: '30px',
@@ -57,7 +60,7 @@ const styles = {
     position: 'absolute',
     top: '40px',
     left: '0',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     listStyle: 'none',
     padding: '10px',
