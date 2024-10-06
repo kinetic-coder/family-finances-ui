@@ -1,71 +1,45 @@
-import './App.css';
-import Home from './Home';
-import Registration from './User/Registration';
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React from "react";
+import { Router, Route, Routes, BrowserRouter } from "react-router-dom";
+import { Container } from "reactstrap";
 
-function App() {
+import Loading from "./components/Loading";
+import Footer from "./components/Footer";
+import { useAuth0 } from "@auth0/auth0-react";
+import Home from "./views/Home";
+import Header from "./components/Header";
+import "./style/global.css";
+
+// styles
+import "./App.css";
+
+// fontawesome
+import initFontAwesome from "./utils/initFontAwesome";
+initFontAwesome();
+
+const App = () => {
+  const { isLoading, error } = useAuth0();
+
+  if (error) {
+    return <div>Oops... {error.message}</div>;
+  }
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <header className="App-header">
+    <BrowserRouter>
+      <div id="app" className="d-flex flex-column h-100">
+        <Header />
+        <Container className="flex-grow-1 mt-5">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Register" element={<Registration />} />
           </Routes>
-        </header>
+        </Container>
+        <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
-}
-
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <nav style={styles.navbar}>
-      <div 
-        style={styles.burgerIcon} 
-        onMouseDown={toggleMenu} 
-      >
-        &#9776; {/* Burger bar icon */}
-      </div>
-      {isOpen && (
-        <ul 
-          style={styles.menu} 
-        >
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/Register">Register</Link></li>
-        </ul>
-      )}
-    </nav>
-  );
-}
-
-const styles = {
-  navbar: {
-    position: 'relative',
-    backgroundColor: 'white',
-  },
-  burgerIcon: {
-    fontSize: '30px',
-    cursor: 'pointer',
-  },
-  menu: {
-    position: 'absolute',
-    top: '40px',
-    left: '0',
-    backgroundColor: 'white',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    listStyle: 'none',
-    padding: '10px',
-    margin: '0',
-  },
 };
 
 export default App;
