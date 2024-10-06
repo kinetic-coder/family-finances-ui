@@ -1,0 +1,7 @@
+{
+    "domain": "dev-gzsc3abyzl2g8ur7.uk.auth0.com",
+    "clientId": "vwfVTrz5m8ViQjLBVYilq2I5G33moFrT",
+    "audience": "{YOUR AUTH0 API_IDENTIFIER}",
+    "appOrigin": "http://localhost:3000",
+    "apiOrigin": "{OPTIONAL: THE BASE URL OF YOUR API (default: http://localhost:3001)}"
+  }
